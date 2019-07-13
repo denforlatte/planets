@@ -7,6 +7,11 @@ const CelestialBodySchema = new Schema({
     required: true,
     max: 60
   },
+  system: { // @NOTE  This allows for other stellar systems to be added, and they could have a collection, making this a reference.
+    type: String,
+    default: "solar_system",
+    max: 60
+  },
   distance_sun: {
     type: Number
   },
@@ -30,7 +35,7 @@ const CelestialBodySchema = new Schema({
     type: Number,
     required: true
   },
-  interesting_facts: {
+  interesting_facts: { // @NOTE For flexibility, additional facts can be added and iterated through by the client.
     type: [String],
     max: 500
   }
