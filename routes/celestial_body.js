@@ -27,11 +27,12 @@ router.post('/', [[
   
   // Create new object from req and save to collection.
   try {
-    const { name, star_system, distance_sun, mass, diameter, density, surface_gravity, number_of_moons, interesting_facts } = req.body;
+    const { name, type, star_system, distance_sun, mass, diameter, density, surface_gravity, number_of_moons, interesting_facts } = req.body;
 
     // Create an intermediate object in case optional inputs are not sent.
     let celestialBodyFields = {
       name,
+      type,
       mass,
       diameter,
       density,
@@ -57,5 +58,32 @@ router.post('/', [[
 // @ROUTE   PUT /celestial_body
 // @DESC    Edit a celestial body
 // @ACCESS  Private
+router.put('/:id', async (req, res) => {
+  try {
+    // Find celestial body by id param
+    let celestialBody = await CelestialBody.findById(req.params.id);
+    if (!celestialBody) return res.status(404).json({msg: 'Celestial body not found.'});
+
+    // Check for errors in the sent properties
+    let errors = [];
+    const bodyProperties = Object.getOwnPropertyNames(req.body); // Make an array of sent properties to test against schema.
+
+    bodyProperties.forEach((property) => {
+      if (!CelestialBody.schema.paths[property]) {
+        errors.push({msg: `Cannot set property: '${property}'.`});
+      }
+    })
+
+    if (errors.length > 0) return res.status(404).json(errors);
+    
+    // Update the document
+    celestialBody = await CelestialBody.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    return res.json(celestialBody);
+
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send('Server error');
+  }
+})
 
 module.exports = router;
