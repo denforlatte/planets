@@ -7,7 +7,7 @@ const CelestialBodySchema = new Schema({
     required: true,
     max: 60
   },
-  system: { // @NOTE  This allows for other stellar systems to be added, and they could have a collection, making this a reference.
+  star_system: { // @NOTE  This allows for other stellar systems to be added, and they could have a collection, making this a reference.
     type: String,
     default: "solar_system",
     max: 60
@@ -41,4 +41,4 @@ const CelestialBodySchema = new Schema({
   }
 })
 
-module.exports = CelestialBodySchema = mongoose.model('celestial_bodies', CelestialBodySchema);
+module.exports = CelestialBody = mongoose.model('celestial_bodies', CelestialBodySchema);

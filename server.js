@@ -15,6 +15,7 @@ connectToDatabase();
 app.get('/', (req, res) => res.send('API online.'));
 
 // @NOTE  Added routes now in case more functionality needs to be added later.
+app.use('/celestial_body', require('./routes/celestial_body'));
 
 // If .PORT (production) doesn't exist, use the local .env's port
 const PORT = process.env.PORT || process.env.DEV_SERVER_PORT;
