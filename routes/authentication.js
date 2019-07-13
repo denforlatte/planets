@@ -23,7 +23,7 @@ router.post('/', [
       canEdit: true
     };
 
-    jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 60000}, (error, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 60 * 60}, (error, token) => {
       if (error) throw error;
       res.json({ token });
     });

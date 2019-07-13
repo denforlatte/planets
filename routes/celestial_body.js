@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+const authentication = require('../middleware/authentication');
 
 // Models
 const CelestialBody = require('../models/CelestialBody');
@@ -8,9 +9,7 @@ const CelestialBody = require('../models/CelestialBody');
 // @ROUTE   POST /celestial_body
 // @DESC    Add a new celestial body. Not yet used on frontend but useful for testing and adding the first bodies.
 // @ACCESS  Private
-
-// @TODO    Add auth
-router.post('/', [[
+router.post('/', [ authentication, [
   // Additional validation on top of frontend validation for more flexibility and reliability
   check('name', 'Name is required').not().isEmpty(),
   check('type', 'Type is required').not().isEmpty(),
@@ -58,7 +57,7 @@ router.post('/', [[
 // @ROUTE   PUT /celestial_body
 // @DESC    Edit a celestial body
 // @ACCESS  Private
-router.put('/:id', async (req, res) => {
+router.put('/:id', authentication, async (req, res) => {
   try {
     // Find celestial body by id param
     let celestialBody = await CelestialBody.findById(req.params.id);
