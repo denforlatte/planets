@@ -13,6 +13,7 @@ const CelestialBody = require('../models/CelestialBody');
 router.post('/', [[
   // Additional validation on top of frontend validation for more flexibility and reliability
   check('name', 'Name is required').not().isEmpty(),
+  check('type', 'Type is required').not().isEmpty(),
   check('mass', 'Mass is required').not().isEmpty(),
   check('diameter', 'Diameter is required').not().isEmpty(),
   check('density', 'Density is required').not().isEmpty(),
@@ -42,6 +43,7 @@ router.post('/', [[
     if (distance_sun) celestialBodyFields.distance_sun = distance_sun;
     if (interesting_facts) celestialBodyFields.interesting_facts = interesting_facts;
 
+    // Save the new celestial body and return it.
     const newCelestialBody = new CelestialBody(celestialBodyFields);
     const celestialBody = await newCelestialBody.save();
 
@@ -50,6 +52,10 @@ router.post('/', [[
     console.error(error.message);
     res.status(500).send('Server error');
   }
-})
+});
+
+// @ROUTE   PUT /celestial_body
+// @DESC    Edit a celestial body
+// @ACCESS  Private
 
 module.exports = router;
