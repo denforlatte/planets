@@ -1,3 +1,15 @@
 @import './celestial-container';
 @import './celestial-info';
 
+body {
+  background-color: rgb(20, 20, 50);
+  color: rgb(230, 230, 230);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; // Stops the Edit button from stretching to 100% height.
+  padding: 10px;
+}
