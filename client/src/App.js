@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 
-function App() {
+import Header from './components/layout/Header';
+import StarSystem from './components/star-system/StarSystem';
+import CelestialBody from './components/celestial-body/CelestialBody';
+
+// This routing is quite specific to just the Solar System but the structure itself is scaleable.
+const App = () => {
+  const [canEdit, setCanEdit] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header canEdit={canEdit} setCanEdit={setCanEdit}/>
+      <Switch>
+        <Route exact path="/" component={StarSystem} />
+        <Route exact path="/:id" component={CelestialBody} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
