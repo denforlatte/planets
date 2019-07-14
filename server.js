@@ -18,6 +18,7 @@ app.get('/', (req, res) => res.send('API online.'));
 app.use('/celestial_body', require('./routes/celestial_body'));
 app.use('/star_system', require('./routes/star_system'));
 app.use('/authentication', require('./routes/authentication'));
+app.use('/images', express.static('public'));
 
 // If .PORT (production) doesn't exist, use the local .env's port
 const PORT = process.env.PORT || process.env.DEV_SERVER_PORT;

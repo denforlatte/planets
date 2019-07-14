@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Danny Wilkins",
   "license": "MIT",
@@ -18,7 +20,6 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
-    "jest": "^24.8.0",
     "nodemon": "^1.19.1"
   }
 }

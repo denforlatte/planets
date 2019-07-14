@@ -12,6 +12,10 @@ const CelestialBodySchema = new Schema({
     required: true,
     max: 60
   },
+  image_path: {
+    type: String,
+    max:60
+  },
   star_system: { // @NOTE  This allows for other stellar systems to be added, and they could have a collection, making this a reference.
     type: String,
     default: "solar_system",
