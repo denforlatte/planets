@@ -14,7 +14,7 @@ const SelectBody = ({ celestialBodies }) => {
   return (
     <nav>
       <ButtonDropdown isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
-        <DropdownToggle caret>Button Dropdown</DropdownToggle>
+        <DropdownToggle caret>Select a celestial body</DropdownToggle>
         <DropdownMenu>
           {celestialBodies.map(body => (
             <DropdownItem key={body._id}>

@@ -1,29 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ClickableBody = ({
   celestialBody: {
-    id,
+    _id,
     name,
-    type,
-    image_path,
-    distance_sun,
-    mass,
-    diameter,
-    density,
-    surface_gravity,
-    number_of_moons,
-    interesting_facts
-  }
+    image_path
+  },
+  height
 }) => {
   return (
-    <>
-      <h1>{name}</h1>
-      <img src={'/images/' + image_path} />
-    </>
+    <li>
+      <Link to={'/solar_system/' + _id}>
+        <img src={'/images/' + image_path} alt={name} style={{height: height}}/>
+      </Link>
+    </li>
   );
 };
 
-ClickableBody.propTypes = {};
+
+ClickableBody.propTypes = {
+  celestialBody: PropTypes.object.isRequired,
+  height: PropTypes.number.isRequired
+};
 
 export default ClickableBody;
