@@ -3,6 +3,8 @@
 
 body {
   background-color: rgb(20, 20, 50);
+  background-image: url("https://cdn.pixabay.com/photo/2016/09/08/12/00/starry-sky-1654074_960_720.jpg");
+  background-size: cover;
   color: rgb(230, 230, 230);
   font-family: 'Courier New', Courier, monospace;
 }
@@ -18,4 +20,12 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.font--primary * {
+  color: rgb(230, 230, 230);
+}
+
+.font--secondary  * {
+  color: rgb(20, 20, 20)
 }

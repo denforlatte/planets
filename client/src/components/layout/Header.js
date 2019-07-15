@@ -1,19 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const Header = ({canEdit, setCanEdit}) => {
+const Header = ({ canEdit, toggleEditMode }) => {
+  const [toggleModal, setToggleModal] = useState(false);
+  const [input, setInput] = useState('');
+
+  const handleOnChange = (e) => {
+    setInput(e.target.value);
+  }
+
+  // Send the input to the toggle edit, wipe the input, close the modal
+  const handleOnSumbit = () => {
+    toggleEditMode(input);
+    setInput('');
+    setToggleModal(false);
+  }
+
+  // Display an edit/stop edit button with modal password input
   return (
     <header>
       <h1>The Solar System</h1>
-      <Button>Edit</Button>
+      {canEdit ? (
+        <Button onClick={() => toggleEditMode()}>Stop Editing</Button>
+      ) : (
+        <Button onClick={() => setToggleModal(true)}>Edit</Button>
+      )}
+      <Modal isOpen={toggleModal} toggle={() => setToggleModal(false)}>
+          <ModalHeader toggle={() => setToggleModal(false)} className="font--secondary">Enter Password</ModalHeader>
+          <ModalBody className="font--secondary">
+            <p>Please Enter the password to enable edit mode.</p>
+            <input onChange={e => handleOnChange(e)}></input>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={() => handleOnSumbit()}>Submit</Button>{' '}
+            <Button color="secondary" onClick={() => setToggleModal(false)}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
     </header>
   );
 };
 
 Header.propTypes = {
   canEdit: PropTypes.bool.isRequired,
-  setCanEdit: PropTypes.func.isRequired
+  toggleEditMode: PropTypes.func.isRequired
 };
 
 export default Header;

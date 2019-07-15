@@ -12,6 +12,8 @@
 
 body {
   background-color: #141432;
+  background-image: url("https://cdn.pixabay.com/photo/2016/09/08/12/00/starry-sky-1654074_960_720.jpg");
+  background-size: cover;
   color: #e6e6e6;
   font-family: "Courier New", Courier, monospace;
 }
@@ -27,6 +29,14 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.font--primary * {
+  color: #e6e6e6;
+}
+
+.font--secondary * {
+  color: #141414;
 }
 
 /*# sourceMappingURL=main.css.map */

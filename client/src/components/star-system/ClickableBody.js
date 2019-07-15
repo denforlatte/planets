@@ -11,7 +11,6 @@ const ClickableBody = ({
   height,
   paddingLeft
 }) => {
-  console.log(paddingLeft)
   return (
     <li style={{paddingLeft}}>
       <Link to={'/solar_system/' + _id}>
