@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 
 import SelectBody from '../layout/SelectBody';
@@ -6,14 +6,19 @@ import ClickableBody from './ClickableBody';
 
 const StarSystem = props => {
   const [celestialBodies, setCelestialBodies] = useState([]);
+  const refMain = useRef(null);
 
   useEffect(() =>{
     axios.get(`/star_system`)
     .then(res => setCelestialBodies(res.data));
   }, []);
 
-  // Explain positioning code
-
+  // Find width of container and divide it up to space out bodies.
+  let horizontalStep = 0;
+  if (refMain.current && refMain.current.getBoundingClientRect().width) {
+    let containerWdith = refMain.current.getBoundingClientRect().width;
+    horizontalStep = calcBodyHorizontalStep(containerWdith, celestialBodies.length);
+  }
 
   // If the celestial bodies have been fetched, calculate the range of the diameters for ClickableBody scaling
   let minDiameter;
@@ -25,12 +30,11 @@ const StarSystem = props => {
 
   return (
     <>
-      <SelectBody celestialBodies={celestialBodies} />
-      <h1>Solar Systems</h1>
-      <main>
-        <ol>
-          {celestialBodies.map(body => (
-            <ClickableBody key={body._id} celestialBody={body} height={calcClickableBodyHeight(body.diameter, minDiameter, maxDiameter)}/>
+      <SelectBody celestialBodies={celestialBodies}/>
+      <main className="celestial-container">
+        <ol ref={refMain} className="celestial-list">
+          {celestialBodies.map((body, i) => (
+            <ClickableBody key={body._id} celestialBody={body} height={calcClickableBodyHeight(body.diameter, minDiameter, maxDiameter)} paddingLeft={horizontalStep * i}/>
           ))}
         </ol>
         <p>*not to scale</p>
@@ -39,7 +43,14 @@ const StarSystem = props => {
   )
 }
 
-const calcClickableBodyHeight = (diameter, minDiameter, maxDiameter) => {
+// Calculate the distance between the bodies required to spread them out.
+export const calcBodyHorizontalStep = (containerWidth, numberOfBodies) => {
+  let adjustedWidth = containerWidth - 300;
+  let horizontalStep = adjustedWidth / (numberOfBodies - 1);
+  return horizontalStep;
+}
+
+export const calcClickableBodyHeight = (diameter, minDiameter, maxDiameter) => {
   //    To show the bodies to scale would be impossible but I can still clue the user into the sizes
   // of bodies compared to other bodies (eg. "Jupiter is larger than Earth"). I set a min and max img
   // height and scale the bodies between those.

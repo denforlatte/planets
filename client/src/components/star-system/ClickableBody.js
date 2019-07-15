@@ -8,10 +8,12 @@ const ClickableBody = ({
     name,
     image_path
   },
-  height
+  height,
+  paddingLeft
 }) => {
+  console.log(paddingLeft)
   return (
-    <li>
+    <li style={{paddingLeft}}>
       <Link to={'/solar_system/' + _id}>
         <img src={'/images/' + image_path} alt={name} style={{height: height}}/>
       </Link>
@@ -22,7 +24,8 @@ const ClickableBody = ({
 
 ClickableBody.propTypes = {
   celestialBody: PropTypes.object.isRequired,
-  height: PropTypes.number.isRequired
+  height: PropTypes.number.isRequired,
+  paddingLeft: PropTypes.number.isRequired
 };
 
 export default ClickableBody;

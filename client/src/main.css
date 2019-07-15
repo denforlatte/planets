@@ -1,5 +1,13 @@
-ol {
+.celestial-container {
+  margin: 30px 10% 0 10%;
+  max-width: 1600px;
+}
+
+.celestial-list {
   list-style-type: none;
+}
+.celestial-list li {
+  padding-top: 10px;
 }
 
 body {
@@ -13,6 +21,12 @@ header {
   justify-content: space-between;
   align-items: flex-start;
   padding: 10px;
+}
+
+.button--dropdown {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=main.css.map */

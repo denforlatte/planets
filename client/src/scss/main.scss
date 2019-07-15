@@ -13,3 +13,9 @@ header {
   align-items: flex-start; // Stops the Edit button from stretching to 100% height.
   padding: 10px;
 }
+
+.button--dropdown {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

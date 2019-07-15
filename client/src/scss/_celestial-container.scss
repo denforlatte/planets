@@ -1,3 +1,12 @@
-ol {
+.celestial-container {
+  margin: 30px 10% 0 10%;
+  max-width: 1600px;
+}
+
+.celestial-list {
   list-style-type: none;
+
+  li {
+    padding-top: 10px;
+  }
 }

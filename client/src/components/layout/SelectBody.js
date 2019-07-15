@@ -12,7 +12,7 @@ const SelectBody = ({ celestialBodies }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav>
+    <nav className="button--dropdown">
       <ButtonDropdown isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
         <DropdownToggle caret>Select a celestial body</DropdownToggle>
         <DropdownMenu>
