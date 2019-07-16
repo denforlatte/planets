@@ -35,15 +35,18 @@ const StarSystem = props => {
       <SelectBody celestialBodies={celestialBodies}/>
       {error && <h4>{error}</h4>}
 
-      {}
-
       <main className="celestial-container">
         <ol ref={refMain} className="celestial-list">
-          {celestialBodies.map((body, i) => (
-            <ClickableBody key={body._id} celestialBody={body} height={calcClickableBodyHeight(body.diameter, minDiameter, maxDiameter)} paddingLeft={horizontalStep * i}/>
-          ))}
+        {celestialBodies.map((body, i) => (
+          <ClickableBody key={body._id} celestialBody={body} height={calcClickableBodyHeight(body.diameter, minDiameter, maxDiameter)} paddingLeft={horizontalStep * i}/>
+        ))}
         </ol>
-        <p>*not to scale</p>
+        {celestialBodies.length > 0 ? (
+          <>
+            <p>*not to scale</p>
+            <p>**celestial body images from NASA image library</p>
+          </>
+        ) : <p>Loading...</p>}
       </main>
     </>
   )

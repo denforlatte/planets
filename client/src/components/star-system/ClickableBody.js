@@ -7,7 +7,9 @@ const ClickableBody = ({
   celestialBody: {
     _id,
     name,
-    image_path
+    image_path,
+    distance_sun,
+    diameter
   },
   height,
   paddingLeft
@@ -19,8 +21,11 @@ const ClickableBody = ({
       <Link to={'/solar_system/' + _id}>
         <img src={'/images/' + image_path} alt={name} style={{height: height}} id={'body_' + _id}/>
       </Link>
-      <Tooltip placement="right" isOpen={tooltipOpen} target={'body_' + _id} toggle={() => setTooltipOpen(!tooltipOpen)}>
-        {name}
+      <Tooltip placement="right" isOpen={tooltipOpen} target={'body_' + _id} toggle={() => setTooltipOpen(!tooltipOpen)} style={{lineHeight: "1rem"}}>
+        <h6>{name}</h6>
+        {distance_sun && <p>Distance to Sun: {distance_sun} km</p>}
+        <p>Diameter: {diameter} km</p>
+        <p>Click on the image for more</p>
       </Tooltip>
     </li>
   );
