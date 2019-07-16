@@ -10,11 +10,40 @@
   padding-top: 10px;
 }
 
+.celestialbody--container {
+  margin: auto;
+  padding: 20px 30px;
+  font-size: 18px;
+  line-height: 1.5rem;
+  max-width: 1000px;
+}
+
+.celestialbody--table {
+  margin: 0 0 40px 0;
+}
+
+.celestialbody--image {
+  height: 300px;
+  margin: 20px 30px;
+}
+
+@media (min-width: 600px) {
+  .celestialbody--table {
+    display: flex;
+  }
+  .celestialbody--table div {
+    margin: 0 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 body {
   background-color: #141432;
-  background-image: url("https://cdn.pixabay.com/photo/2016/09/08/12/00/starry-sky-1654074_960_720.jpg");
+  background-image: url("/images/starry_sky_background.jpg");
   background-size: cover;
-  color: #e6e6e6;
+  min-height: 98vh;
+  color: #fafafa;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -31,12 +60,16 @@ header {
   justify-content: center;
 }
 
-.font--primary * {
+.font--primary, .font--primary * {
   color: #e6e6e6;
 }
 
-.font--secondary * {
+.font--secondary, .font--secondary * {
   color: #141414;
+}
+
+a {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=main.css.map */

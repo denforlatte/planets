@@ -3,9 +3,10 @@
 
 body {
   background-color: rgb(20, 20, 50);
-  background-image: url("https://cdn.pixabay.com/photo/2016/09/08/12/00/starry-sky-1654074_960_720.jpg");
+  background-image: url("/images/starry_sky_background.jpg");
   background-size: cover;
-  color: rgb(230, 230, 230);
+  min-height: 98vh; // Stabilises the "cover" of the background image
+  color: rgb(250, 250, 250);
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -22,10 +23,14 @@ header {
   justify-content: center;
 }
 
-.font--primary * {
+.font--primary, .font--primary * {
   color: rgb(230, 230, 230);
 }
 
-.font--secondary  * {
+.font--secondary, .font--secondary  * {
   color: rgb(20, 20, 20)
+}
+
+a {
+  text-decoration: none;
 }

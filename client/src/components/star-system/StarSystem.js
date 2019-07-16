@@ -6,11 +6,13 @@ import ClickableBody from './ClickableBody';
 
 const StarSystem = props => {
   const [celestialBodies, setCelestialBodies] = useState([]);
+  const [error, setError] = useState(null);
   const refMain = useRef(null);
 
   useEffect(() =>{
     axios.get(`/star_system`)
-    .then(res => setCelestialBodies(res.data));
+    .then(res => setCelestialBodies(res.data))
+    .catch(() => setError('Could not retrieve star system data, please refresh or try again later.'));
   }, []);
 
   // Find width of container and divide it up to space out bodies.
@@ -31,6 +33,10 @@ const StarSystem = props => {
   return (
     <>
       <SelectBody celestialBodies={celestialBodies}/>
+      {error && <h4>{error}</h4>}
+
+      {}
+
       <main className="celestial-container">
         <ol ref={refMain} className="celestial-list">
           {celestialBodies.map((body, i) => (

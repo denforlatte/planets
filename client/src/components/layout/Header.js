@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const Header = ({ canEdit, toggleEditMode }) => {
@@ -20,7 +21,7 @@ const Header = ({ canEdit, toggleEditMode }) => {
   // Display an edit/stop edit button with modal password input
   return (
     <header>
-      <h1>The Solar System</h1>
+      <Link to='/' className="font--primary"><h1>The Solar System</h1></Link>
       {canEdit ? (
         <Button onClick={() => toggleEditMode()}>Stop Editing</Button>
       ) : (

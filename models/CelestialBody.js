@@ -41,7 +41,7 @@ const CelestialBodySchema = new Schema({
     required: true
   },
   number_of_moons: {
-    type: Number,
+    type: String, // This is a string because often there is no clear answer.
     required: true
   },
   interesting_facts: { // @NOTE For flexibility, additional facts can be added and iterated through by the client.

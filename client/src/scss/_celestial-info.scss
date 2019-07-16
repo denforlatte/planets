@@ -1,0 +1,33 @@
+.celestialbody--container {
+  margin: auto;
+  padding: 20px 30px;
+  font-size: 18px;
+  line-height: 1.5rem;
+  max-width: 1000px;
+}
+
+.celestialbody--table {
+  margin: 0 0 40px 0;
+}
+
+.celestialbody--image {
+  height: 300px;
+  margin: 20px 30px;
+}
+
+@media (min-width: 600px) {
+  .celestialbody--table {
+    display: flex;
+
+    div {
+      margin: 0 0 0 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+
+.interestingfacts {
+
+}
