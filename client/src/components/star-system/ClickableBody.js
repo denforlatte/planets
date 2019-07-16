@@ -20,14 +20,19 @@ const ClickableBody = ({
   return (
     <li style={{paddingLeft}}>
       <Link to={'/solar_system/' + _id}>
-        <img src={'/images/' + image_path} alt={name} style={{height: height}} id={'body_' + _id}/>
+        <div style={{width: "400px", overflow: "visible", textAlign: "center"}}>
+          <img src={'/images/' + image_path} alt={name} style={{height: height}} id={'body_' + _id}/>
+        </div>
       </Link>
-      <Tooltip placement="right" isOpen={tooltipOpen} target={'body_' + _id} toggle={() => setTooltipOpen(!tooltipOpen)} style={{lineHeight: "1rem"}}>
+      
+      {window.innerWidth > 1000 && (
+        <Tooltip placement="right" isOpen={tooltipOpen} target={'body_' + _id} toggle={() => setTooltipOpen(!tooltipOpen)} style={{lineHeight: "1rem"}}>
         <h6>{name}</h6>
         {distance_sun && <p>Distance to Sun: {numeral(distance_sun).format('0,0')} km</p>}
         <p>Diameter: {numeral(diameter).format('0,0')} km</p>
         <p>Click on the image for more</p>
       </Tooltip>
+      )}
     </li>
   );
 };

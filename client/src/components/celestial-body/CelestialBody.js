@@ -38,11 +38,12 @@ const CelestialBody = ({ match, canEdit }) => {
               <div>
                 {distance_sun && <BodyDatum _id={_id} property="distance_sun" label="Distance from Sun" datum={numeral(distance_sun).format('0,0')} unit="Km" canEdit={canEdit} setCelestialBody={setCelestialBody} />}
 
-                <BodyDatum _id={_id} property="mass" label="Mass" datum={numeral(mass).format('0,0')} unit="Kg" canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum _id={_id} property="mass" label="Mass" datum={numeral(mass).format('0,0.000')} unit={<>x10<sup>24</sup> Kg</>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
                 <BodyDatum _id={_id} property="diameter" label="Diameter" datum={numeral(diameter).format('0,0')} unit="Km" canEdit={canEdit} setCelestialBody={setCelestialBody} />
                 <BodyDatum _id={_id} property="density" label="Density" datum={numeral(density).format('0,0')} unit={<>Kg/m<sup>3</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
-                <BodyDatum _id={_id} property="surface_gravity" label="Surface Gravity" datum={numeral(surface_gravity).format('0,0.00')} unit={<>m/s<sup>2</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
-                <BodyDatum _id={_id} property="number_of_moons" label="Number of Moons" datum={number_of_moons} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum _id={_id} property="surface_gravity" label="Surface Gravity" datum={numeral(surface_gravity).format('0,0.0')} unit={<>m/s<sup>2</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+
+                {number_of_moons && <BodyDatum _id={_id} property="number_of_moons" label="Number of Moons" datum={number_of_moons} canEdit={canEdit} setCelestialBody={setCelestialBody} />}
               </div>
             </section>
 

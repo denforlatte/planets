@@ -54,7 +54,8 @@ const StarSystem = props => {
 
 // Calculate the distance between the bodies required to spread them out.
 export const calcBodyHorizontalStep = (containerWidth, numberOfBodies) => {
-  let adjustedWidth = containerWidth - 300;
+  let adjustedWidth = containerWidth - 500;
+  if(adjustedWidth <= 0) return 1;
   let horizontalStep = adjustedWidth / (numberOfBodies - 1);
   return horizontalStep;
 }
@@ -77,7 +78,7 @@ export const calcClickableBodyHeight = (diameter, minDiameter, maxDiameter) => {
   const scaleRatio = Math.pow( (diameter - minDiameter) / (maxDiameter - minDiameter), 1 / scaleDampening );
 
   // Apply this to the constraints and return
-  let psuedoRelativeHeight = minHeight + (scaleRange * scaleRatio);
+  let psuedoRelativeHeight = Math.floor(minHeight + (scaleRange * scaleRatio));
   return psuedoRelativeHeight;
 }
 

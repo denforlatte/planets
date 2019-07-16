@@ -34,8 +34,7 @@ router.post('/', [ authentication, [
   check('mass', 'Mass is required').not().isEmpty(),
   check('diameter', 'Diameter is required').not().isEmpty(),
   check('density', 'Density is required').not().isEmpty(),
-  check('surface_gravity', 'Gravity is required').not().isEmpty(),
-  check('number_of_moons', 'Moons is required').not().isEmpty()
+  check('surface_gravity', 'Gravity is required').not().isEmpty()
 ]], async (req, res) => {
   const errors = validationResult(req)
   if(!errors.isEmpty()) {
