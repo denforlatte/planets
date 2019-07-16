@@ -4,6 +4,6 @@ import { shallow } from 'enzyme';
 
 describe('<Header />', () => {
   it('matches snapshot', () => {
-    expect(shallow(<Header />)).toMatchSnapshot();
+    expect(shallow(<Header canEdit={false} toggleEditMode={jest.fn()}/>)).toMatchSnapshot();
   });
 });
