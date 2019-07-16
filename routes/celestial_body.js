@@ -102,6 +102,61 @@ router.put('/:id', authentication, async (req, res) => {
     console.error(error.message);
     return res.status(500).send('Server error');
   }
+});
+
+// @ROUTE   DELETE /celestial_body/:id
+// @DESC    Delete a celestial body by id
+// @ACCESS  Private
+router.delete('/:id', authentication, async (req, res) => {
+  try {
+    let celestialBody = await CelestialBody.findById(req.params.id);
+    if (!celestialBody) return res.status(400).json({msg: 'Celestial body not found'});
+
+    await celestialBody.remove();
+
+    return res.json({msg: 'Celestial body deleted.'});
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send('Server error');
+  }
+});
+
+// @ROUTE   POST /celestial_body/:id/facts
+// @DESC    Add an interesting fact
+// @ACCESS  Private
+router.post('/:id/facts', [authentication, [
+  check('fact', 'Fact is required.').not().isEmpty()
+]], async (req, res) => {
+  try {
+    let celestialBody = await CelestialBody.findById(req.params.id);
+    if (!celestialBody) return res.status(400).json({msg: 'Celestial body not found'});
+
+    celestialBody.interesting_facts.push(req.body.fact);
+    await celestialBody.save()
+
+    return res.json(celestialBody);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send('Server error');
+  }
+})
+
+// @ROUTE   DELETE /celestial_body/:id/facts/:index
+// @DESC    Remove an interesting fact
+// @ACCESS  Private
+router.delete('/:id/facts/:index', authentication, async (req, res) => {
+  try {
+    let celestialBody = await CelestialBody.findById(req.params.id);
+    if (!celestialBody) return res.status(400).json({msg: 'Celestial body not found'});
+
+    celestialBody.interesting_facts.splice(req.params.index, 1);
+    await celestialBody.save();
+
+    return res.json(celestialBody);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send('Server error');
+  }
 })
 
 module.exports = router;

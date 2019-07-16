@@ -4,6 +4,7 @@ import numeral from 'numeral';
 
 import SelectBody from '../layout/SelectBody';
 import BodyDatum from './BodyDatum';
+import InterestingFacts from './InterestingFacts';
 
 const CelestialBody = ({ match, canEdit }) => {
   const [celestialBodies, setCelestialBodies] = useState([]);
@@ -45,14 +46,7 @@ const CelestialBody = ({ match, canEdit }) => {
               </div>
             </section>
 
-            {(interesting_facts.length > 0 || canEdit) && (
-              <section className="interestingfacts">
-                <h3>Interesting Facts</h3>
-                {interesting_facts.map((fact, i) => (
-                  <p key={'fact_' + i}>{fact}</p>
-                ))}
-              </section>
-            )}
+            <InterestingFacts _id={_id} interesting_facts={interesting_facts} canEdit={canEdit} setCelestialBody={setCelestialBody} />
           </>
         ) : <p>Loading...</p>}
       </main>

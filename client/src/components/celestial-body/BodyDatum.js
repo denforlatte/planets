@@ -37,16 +37,16 @@ const BodyDatum = ({_id, property, label, datum, unit, canEdit, setCelestialBody
       {canEdit && <i className="hover fas fa-pen-square" onClick={() => setToggleModal(true)} />}
       
       <Modal isOpen={toggleModal} toggle={() => setToggleModal(false)}>
-          <ModalHeader toggle={() => setToggleModal(false)} className="font--secondary">Change value</ModalHeader>
-          <ModalBody className="font--secondary">
-            <p>Please enter a new value.</p>
-            <input onChange={e => handleOnChange(e)}></input>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={() => handleOnSumbit()}>Submit</Button>{' '}
-            <Button color="secondary" onClick={() => setToggleModal(false)}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
+        <ModalHeader toggle={() => setToggleModal(false)} className="font--secondary">Change value</ModalHeader>
+        <ModalBody className="font--secondary">
+          <p>Please enter a new value.</p>
+          <input onChange={e => handleOnChange(e)}></input>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={() => handleOnSumbit()}>Submit</Button>{' '}
+          <Button color="secondary" onClick={() => setToggleModal(false)}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
     </p>
   );
 };
