@@ -30,7 +30,7 @@ const Header = ({ canEdit, toggleEditMode }) => {
       <Modal isOpen={toggleModal} toggle={() => setToggleModal(false)}>
           <ModalHeader toggle={() => setToggleModal(false)} className="font--secondary">Enter Password</ModalHeader>
           <ModalBody className="font--secondary">
-            <p>Please Enter the password to enable edit mode.</p>
+            <p>Please enter the password to enable edit mode.</p>
             <input onChange={e => handleOnChange(e)}></input>
           </ModalBody>
           <ModalFooter>

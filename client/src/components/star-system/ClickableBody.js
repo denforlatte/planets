@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'reactstrap';
+import numeral from 'numeral';
 
 const ClickableBody = ({
   celestialBody: {
@@ -23,8 +24,8 @@ const ClickableBody = ({
       </Link>
       <Tooltip placement="right" isOpen={tooltipOpen} target={'body_' + _id} toggle={() => setTooltipOpen(!tooltipOpen)} style={{lineHeight: "1rem"}}>
         <h6>{name}</h6>
-        {distance_sun && <p>Distance to Sun: {distance_sun} km</p>}
-        <p>Diameter: {diameter} km</p>
+        {distance_sun && <p>Distance to Sun: {numeral(distance_sun).format('0,0')} km</p>}
+        <p>Diameter: {numeral(diameter).format('0,0')} km</p>
         <p>Click on the image for more</p>
       </Tooltip>
     </li>

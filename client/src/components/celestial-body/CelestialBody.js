@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import numeral from 'numeral';
 
 import SelectBody from '../layout/SelectBody';
+import BodyDatum from './BodyDatum';
 
-const CelestialBody = props => {
+const CelestialBody = ({ match, canEdit }) => {
   const [celestialBodies, setCelestialBodies] = useState([]);
   const [celestialBody, setCelestialBody] = useState({});
   const [error, setError] = useState(null);
@@ -13,12 +15,12 @@ const CelestialBody = props => {
     .then(res => setCelestialBodies(res.data))
     .catch(() => setError('Could not retrieve star system data, please refresh or try again later.'));
 
-    axios.get(`/celestial_body/${props.match.params.id}`)
+    axios.get(`/celestial_body/${match.params.id}`)
     .then(res => setCelestialBody(res.data))
     .catch(() => setError('Could not retrieve celestial body data, please refresh or try again later.'));
-  }, [props.match.params.id]);
+  }, [match.params.id]);
 
-  const { name, type, image_path, distance_sun, mass, diameter, density, surface_gravity, number_of_moons, interesting_facts } = celestialBody;
+  const { _id, name, type, image_path, distance_sun, mass, diameter, density, surface_gravity, number_of_moons, interesting_facts } = celestialBody;
 
   return (
     <>
@@ -28,21 +30,22 @@ const CelestialBody = props => {
         {Object.entries(celestialBody).length > 0 ? (
           <>
             <h2>{name}</h2>
-            <p><strong>Type: </strong>{type}</p>
+            <BodyDatum _id={_id} property="type" label="Type" datum={type} canEdit={canEdit} setCelestialBody={setCelestialBody} />
 
             <section className="celestialbody--table">
               <img src={'/images/' + image_path} alt={name} className="celestialbody--image"/>
               <div>
-                {distance_sun && <p><strong>Distance from Sun: </strong>{distance_sun} km</p>}
-                <p><strong>Mass: </strong>{mass} Kg</p>
-                <p><strong>Diameter: </strong>{diameter} km</p>
-                <p><strong>Density: </strong>{density} Kg/m<sup>3</sup></p>
-                <p><strong>Surface Gravity: </strong>{surface_gravity} m/s<sup>2</sup></p>
-                <p><strong>Number of moons: </strong>{number_of_moons}</p>
+                {distance_sun && <BodyDatum _id={_id} property="distance_sun" label="Distance from Sun" datum={numeral(distance_sun).format('0,0')} unit="Km" canEdit={canEdit} setCelestialBody={setCelestialBody} />}
+
+                <BodyDatum _id={_id} property="mass" label="Mass" datum={numeral(mass).format('0,0')} unit="Kg" canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum _id={_id} property="diameter" label="Diameter" datum={numeral(diameter).format('0,0')} unit="Km" canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum _id={_id} property="density" label="Density" datum={numeral(density).format('0,0')} unit={<>Kg/m<sup>3</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum _id={_id} property="surface_gravity" label="Surface Gravity" datum={numeral(surface_gravity).format('0,0.00')} unit={<>m/s<sup>2</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum _id={_id} property="number_of_moons" label="Number of Moons" datum={number_of_moons} canEdit={canEdit} setCelestialBody={setCelestialBody} />
               </div>
             </section>
 
-            {interesting_facts.length > 0 && (
+            {(interesting_facts.length > 0 || canEdit) && (
               <section className="interestingfacts">
                 <h3>Interesting Facts</h3>
                 {interesting_facts.map((fact, i) => (

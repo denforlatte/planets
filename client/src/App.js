@@ -36,7 +36,7 @@ const App = () => {
       <Header canEdit={canEdit} toggleEditMode={toggleEditMode} />
       <Switch>
         <Route exact path="/" component={StarSystem} />
-        <Route exact path="/solar_system/:id" component={CelestialBody} />
+        <Route exact path="/solar_system/:id" render={(props) => <CelestialBody {...props} canEdit={canEdit} />}/>
       </Switch>
     </Router>
   );
