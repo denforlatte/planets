@@ -11,7 +11,7 @@ const Header = ({ canEdit, toggleEditMode }) => {
     setInput(e.target.value);
   }
 
-  // Send the input to the toggle edit, wipe the input, close the modal
+  // Send the input to API, wipe the input from state, close the modal
   const handleOnSumbit = () => {
     toggleEditMode(input);
     setInput('');
@@ -27,11 +27,13 @@ const Header = ({ canEdit, toggleEditMode }) => {
       ) : (
         <Button onClick={() => setToggleModal(true)}>Edit</Button>
       )}
+
+      
       <Modal isOpen={toggleModal} toggle={() => setToggleModal(false)}>
           <ModalHeader toggle={() => setToggleModal(false)} className="font--secondary">Enter Password</ModalHeader>
           <ModalBody className="font--secondary">
             <p>Please enter the password to enable edit mode.</p>
-            <input onChange={e => handleOnChange(e)}></input>
+            <input onChange={e => handleOnChange(e)} type="password" alt="password input field"></input>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={() => handleOnSumbit()}>Submit</Button>{' '}

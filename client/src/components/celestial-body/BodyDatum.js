@@ -18,6 +18,7 @@ const BodyDatum = ({_id, property, label, datum, unit, canEdit, setCelestialBody
     setToggleModal(false);
   };
 
+  // Send the new value to the API
   const submitValue = (value) => {
     const config = {
       headers: {

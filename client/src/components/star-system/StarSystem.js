@@ -4,8 +4,11 @@ import axios from 'axios';
 import SelectBody from '../layout/SelectBody';
 import ClickableBody from './ClickableBody';
 
+// Effectively the home page, shows the contents of the celestialBodies array, scales them to appropriate sizes,
+// and spreads them out across the page.
 const StarSystem = props => {
   const [celestialBodies, setCelestialBodies] = useState([]);
+  const [horizontalStep, setHorizontalStep] = useState(0);
   const [error, setError] = useState(null);
   const refMain = useRef(null);
 
@@ -15,14 +18,23 @@ const StarSystem = props => {
     .catch(() => setError('Could not retrieve star system data, please refresh or try again later.'));
   }, []);
 
-  // Find width of container and divide it up to space out bodies.
-  let horizontalStep = 0;
-  if (refMain.current && refMain.current.getBoundingClientRect().width) {
-    let containerWdith = refMain.current.getBoundingClientRect().width;
-    horizontalStep = calcBodyHorizontalStep(containerWdith, celestialBodies.length);
-  }
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [celestialBodies]);
 
-  // If the celestial bodies have been fetched, calculate the range of the diameters for ClickableBody scaling
+  const handleResize = () => {
+    // Find width of celestialBodies container and divide it up to space out bodies.
+    if (refMain.current && refMain.current.getBoundingClientRect().width) {
+      let containerWdith = refMain.current.getBoundingClientRect().width;
+      setHorizontalStep(calcBodyHorizontalStep(containerWdith, celestialBodies.length));
+    }
+  }
+  
+  // If the celestial bodies have been fetched, calculate the range of the diameters for <ClickableBody /> scaling
   let minDiameter;
   let maxDiameter;
   if (celestialBodies.length > 0) {
@@ -55,7 +67,7 @@ const StarSystem = props => {
 // Calculate the distance between the bodies required to spread them out.
 export const calcBodyHorizontalStep = (containerWidth, numberOfBodies) => {
   let adjustedWidth = containerWidth - 500;
-  if(adjustedWidth <= 0) return 1;
+  if(adjustedWidth <= 0) return 0; 
   let horizontalStep = adjustedWidth / (numberOfBodies - 1);
   return horizontalStep;
 }

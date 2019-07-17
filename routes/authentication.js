@@ -14,7 +14,7 @@ router.post('/', [
 
   // If password is incorrect, return.
   if (req.body.password !== process.env.PASSWORD) {
-    return res.status(400).json({msg: "Incorrect password"});
+    return res.status(401).json({msg: "Incorrect password"});
   }
 
   // Create and send JSON web token

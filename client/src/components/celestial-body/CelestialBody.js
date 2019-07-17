@@ -11,6 +11,7 @@ const CelestialBody = ({ match, canEdit }) => {
   const [celestialBody, setCelestialBody] = useState({});
   const [error, setError] = useState(null);
 
+  // List of facts and an image about the selected body.
   useEffect(() => {
     axios.get(`/star_system`)
     .then(res => setCelestialBodies(res.data))
@@ -31,28 +32,100 @@ const CelestialBody = ({ match, canEdit }) => {
         {Object.entries(celestialBody).length > 0 ? (
           <>
             <h2>{name}</h2>
-            <BodyDatum _id={_id} property="type" label="Type" datum={type} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+            <BodyDatum
+              _id={_id}
+              property="type"
+              label="Type"
+              datum={type}
+              canEdit={canEdit}
+              setCelestialBody={setCelestialBody}
+            />
 
             <section className="celestialbody--table">
-              <img src={'/images/' + image_path} alt={name} className="celestialbody--image"/>
+              <img
+                src={'/images/' + image_path}
+                alt={name}
+                className="celestialbody--image"
+              />
               <div>
-                {distance_sun && <BodyDatum _id={_id} property="distance_sun" label="Distance from Sun" datum={numeral(distance_sun).format('0,0')} unit="Km" canEdit={canEdit} setCelestialBody={setCelestialBody} />}
+                {distance_sun && (
+                  <BodyDatum
+                    _id={_id}
+                    property="distance_sun"
+                    label="Distance from Sun"
+                    datum={numeral(distance_sun).format('0,0')}
+                    unit="Km"
+                    canEdit={canEdit}
+                    setCelestialBody={setCelestialBody}
+                  />
+                )}
 
-                <BodyDatum _id={_id} property="mass" label="Mass" datum={numeral(mass).format('0,0.000')} unit={<>x10<sup>24</sup> Kg</>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
-                <BodyDatum _id={_id} property="diameter" label="Diameter" datum={numeral(diameter).format('0,0')} unit="Km" canEdit={canEdit} setCelestialBody={setCelestialBody} />
-                <BodyDatum _id={_id} property="density" label="Density" datum={numeral(density).format('0,0')} unit={<>Kg/m<sup>3</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
-                <BodyDatum _id={_id} property="surface_gravity" label="Surface Gravity" datum={numeral(surface_gravity).format('0,0.0')} unit={<>m/s<sup>2</sup></>} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+                <BodyDatum
+                  _id={_id}
+                  property="mass"
+                  label="Mass"
+                  datum={numeral(mass).format('0,0.000')}
+                  unit={<>x10<sup>24</sup> Kg</>}
+                  canEdit={canEdit}
+                  setCelestialBody={setCelestialBody}
+                />
 
-                {number_of_moons && <BodyDatum _id={_id} property="number_of_moons" label="Number of Moons" datum={number_of_moons} canEdit={canEdit} setCelestialBody={setCelestialBody} />}
+                <BodyDatum
+                  _id={_id}
+                  property="diameter"
+                  label="Diameter"
+                  datum={numeral(diameter).format('0,0')}
+                  unit="Km"
+                  canEdit={canEdit}
+                  setCelestialBody={setCelestialBody}
+                />
+
+                <BodyDatum
+                  _id={_id}
+                  property="density"
+                  label="Density"
+                  datum={numeral(density).format('0,0')}
+                  unit={<>Kg/m<sup>3</sup></>}
+                  canEdit={canEdit}
+                  setCelestialBody={setCelestialBody}
+                />
+
+                <BodyDatum
+                  _id={_id}
+                  property="surface_gravity"
+                  label="Surface Gravity"
+                  datum={numeral(surface_gravity).format('0,0.0')}
+                  unit={<>m/s<sup>2</sup></>}
+                  canEdit={canEdit}
+                  setCelestialBody={setCelestialBody}
+                />
+
+                {number_of_moons && (
+                  <BodyDatum
+                    _id={_id}
+                    property="number_of_moons"
+                    label="Number of Moons"
+                    datum={number_of_moons}
+                    canEdit={canEdit}
+                    setCelestialBody={setCelestialBody}
+                  />
+                )}
               </div>
             </section>
 
-            <InterestingFacts _id={_id} interesting_facts={interesting_facts} canEdit={canEdit} setCelestialBody={setCelestialBody} />
+            <InterestingFacts
+              _id={_id}
+              interesting_facts={interesting_facts}
+              canEdit={canEdit}
+              setCelestialBody={setCelestialBody}
+            />
           </>
-        ) : <p>Loading...</p>}
+        ) : (
+          <p>Loading...</p>
+        )}
       </main>
     </>
-  )
+  );
 }
 
 export default CelestialBody

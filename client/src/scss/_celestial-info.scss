@@ -11,8 +11,9 @@
 }
 
 .celestialbody--image {
-  height: 300px;
+  max-height: 300px;
   margin: 20px 30px;
+  max-width: 400px;
 }
 
 @media (min-width: 600px) {

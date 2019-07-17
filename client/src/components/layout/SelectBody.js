@@ -8,6 +8,8 @@ import {
   DropdownItem
 } from 'reactstrap';
 
+
+// Very simple dropdown menu from Reactstrap with content autopopulated from celestialBodies array
 const SelectBody = ({ celestialBodies }) => {
   const [isOpen, setIsOpen] = useState(false);
 
